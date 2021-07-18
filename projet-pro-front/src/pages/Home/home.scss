@@ -1,0 +1,69 @@
+.container {
+  height: 95vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.5),
+      rgba(40, 180, 131, 0.6)
+    ),
+    url(travel.jpg);
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  .text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .heading-primary {
+      color: #fff;
+      text-transform: uppercase;
+      backface-visibility: hidden;
+      .heading-main {
+        display: block;
+        font-size: 7rem;
+        letter-spacing: 1rem;
+        font-weight: 400;
+        animation: moveLeft ease-out 1s;
+
+      }
+      .heading-sub {
+        display: block;
+        font-size: 3rem;
+        letter-spacing: 1.5rem;
+        font-weight: 400;
+        animation: moveRight 1s ease-out;
+      }
+    }
+  }
+}
+
+
+
+//animations
+@keyframes moveLeft {
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    80%{
+        transform: translateX(15px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes moveRight {
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    80%{
+        transform: translateX(-15px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+

@@ -1,0 +1,54 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 10px;
+  .logo {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    margin-left: 5px;
+    transform:scale(1);
+    transition:transform .3s ease-out;
+    &:hover{
+      transform: scale(1.4);
+    }
+  }
+  nav {
+    ul {
+      .navlink {
+        padding: 2rem;
+        font-size: 2rem;
+        color: white;
+        font-weight: 500;
+        display: inline-block;
+        &::before,
+        &::after {
+          content: "";
+          height: 4px;
+          background: #f9dd94;
+          display: block;
+          transition: width 0.3s ease-in-out;
+          margin: 0 auto;
+        }
+
+        &::before {
+          width: 100%;
+        }
+        &::after {
+          width: 0;
+        }
+
+        &:hover::before {
+          width: 0;
+        }
+        &:hover::after {
+          width: 100%;
+        }
+
+        &:hover{
+          color: #f9dd94;
+        }
+      }
+    }
+  }
+}
