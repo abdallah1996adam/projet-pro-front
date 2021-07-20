@@ -1,25 +1,30 @@
 header {
   display: flex;
   justify-content: space-between;
-  padding: 30px 10px;
+  background-color: #444;
+  padding-top: 10px;
+  height: 80px;
+  margin-bottom: 1%;
+
   .logo {
     width: 4rem;
     height: 4rem;
     cursor: pointer;
     margin-left: 5px;
     transform:scale(1);
+    margin-left: 20%;
     transition:transform .3s ease-out;
     &:hover{
-      transform: scale(1.4);
+      transform: scale(1.2);
     }
   }
   nav {
     ul {
       .navlink {
         padding: 2rem;
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: white;
-        font-weight: 500;
+        font-weight: 400;
         display: inline-block;
         &::before,
         &::after {

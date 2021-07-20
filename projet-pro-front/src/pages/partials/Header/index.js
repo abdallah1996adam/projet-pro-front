@@ -15,6 +15,12 @@ const Header = () => {
           <NavLink to="/signup" exact className="navlink">
             Tours
           </NavLink>
+          <NavLink to="/signup" exact className="navlink">
+            Signup
+          </NavLink>
+          <NavLink to="" exact className="navlink">
+            Contact
+          </NavLink>
           <NavLink to="/login" exact className="navlink">
             Login
           </NavLink>
