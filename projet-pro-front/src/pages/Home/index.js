@@ -1,28 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+//icons
 import { Link } from "react-router-dom";
-import {IoMdCompass} from 'react-icons/io'
+import { IoMdCompass } from "react-icons/io";
 import { IconContext } from "react-icons/lib";
-import {MdNaturePeople} from 'react-icons/md'
-import {FaWpexplorer} from 'react-icons/fa'
-import {GiCampingTent} from 'react-icons/gi'
-import {GrLocation} from 'react-icons/gr'
+import { MdNaturePeople } from "react-icons/md";
+import { FaWpexplorer } from "react-icons/fa";
+import { GiCampingTent } from "react-icons/gi";
+import { FiMapPin } from "react-icons/fi";
+import { MdDateRange } from "react-icons/md";
+import { BiUser } from "react-icons/bi";
+import { BiFlag } from "react-icons/bi";
+
+import tourService from "../../services/tours";
 
 import pyramid from "../../assets/images/pyramid.jpg";
 import camels from "../../assets/images/camels.jpg";
 import tutil from "../../assets/images/tutil.jpg";
 
-
 import "./home.scss";
 
 const Home = () => {
+  const [tour, setTour] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await tourService.getAll();
+      const tourData = data.results;
+      const tours = tourData.slice(0, 3);
+      setTour(tours);
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
-    <IconContext.Provider value={{color: "#7ed56f", size: "7rem"}}>
       <section className="container">
         <div className="text-box">
           <h1 className="heading-primary">
             <span className="heading-main">wonder land </span>
-            <span className="heading-sub">Welcome To Sudan !</span>
+            <span className="heading-sub">Bienvenue au Soudan!</span>
           </h1>
         </div>
       </section>
@@ -80,8 +96,11 @@ const Home = () => {
           <div className="row">
             <div className="col-1-of-4">
               <div className="feature-box">
-                <IoMdCompass className="world icon-world"/>
-                <h3 className="header-three margin-small"> Découvrir le Soudan</h3>
+                <IoMdCompass className="world icon-world" />
+                <h3 className="header-three margin-small">
+                  {" "}
+                  Découvrir le Soudan
+                </h3>
                 <p className="feature-box_text">
                   eos et accusamus et iusto odio dignissimos ducimus qui
                   blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -91,8 +110,10 @@ const Home = () => {
             </div>
             <div className="col-1-of-4">
               <div className="feature-box">
-                <MdNaturePeople className="world icon-world"/>
-                <h3 className="header-three margin-small">Rencontrer la nature</h3>
+                <MdNaturePeople className="world icon-world" />
+                <h3 className="header-three margin-small">
+                  Rencontrer la nature
+                </h3>
                 <p className="feature-box_text">
                   eos et accusamus et iusto odio dignissimos ducimus qui
                   blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -102,8 +123,10 @@ const Home = () => {
             </div>
             <div className="col-1-of-4">
               <div className="feature-box">
-                <FaWpexplorer className="world icon-world"/>
-                <h3 className="header-three margin-small">Explorer plus d'endroits</h3>
+                <FaWpexplorer className="world icon-world" />
+                <h3 className="header-three margin-small">
+                  Explorer plus d'endroits
+                </h3>
                 <p className="feature-box_text">
                   eos et accusamus et iusto odio dignissimos ducimus qui
                   blanditiis praesentium voluptatum deleniti atque corrupti quos
@@ -113,7 +136,7 @@ const Home = () => {
             </div>
             <div className="col-1-of-4">
               <div className="feature-box">
-                <GiCampingTent className="world icon-world"/>
+                <GiCampingTent className="world icon-world" />
                 <h3 className="header-three margin-small">Vivez l'aventure</h3>
                 <p className="feature-box_text">
                   eos et accusamus et iusto odio dignissimos ducimus qui
@@ -126,56 +149,88 @@ const Home = () => {
         </section>
       </main>
       <section className="tours">
-      <div className="center margin-bottom-8">
+        <div className="center margin-bottom-8">
+          <h3 className="heading-secondary">les tours les plus populaires</h3>
+        </div>
+        <main className="main">
+          <div className="card-container">
+            {tour.map((t) => (
+              <div className="card" key={t.id}>
+                <div className="card-header">
+                  <div className="card-image">
+                    <div className="card-image-overlay"></div>
+                    <img
+                      src={`data:image/png;base64,${t.images[1].image}`}
+                      alt="camels"
+                      className="card-img-pic"
+                    />
+                  </div>
+                  <h3 className="heading-three">
+                    <span>{t.tour_name}</span>
+                  </h3>
+                </div>
+                <div className="card-details">
+                  <h4 className="card-sub-header">{t.duration}</h4>
+                  <p className="card-text">
+                    {t.description.length < 20
+                      ? `${t.description}`
+                      : `${t.description.substring(0, 60)}...`}
+                  </p>
+                  <div className="card-data">
+                    <FiMapPin className="card-icon" />
+                    <span>{t.location}</span>
+                  </div>
+                  <div className="card-data">
+                    <MdDateRange className="card-icon" />
+                    <span>{t.tour_date.substring(0, 10)}</span>
+                  </div>
+                  <div className="card-data">
+                    <BiUser className="card-icon" />
+                    <span>{t.max_people}</span>
+                  </div>
+                  <div className="card-data">
+                    <BiFlag className="card-icon" />
+                    <span>{t.guide_name}</span>
+                  </div>
+                </div>
+                <div className="card-footer">
+                  <p>
+                    <span className="card-footer-prix">{t.price} </span>
+                    <span className="card-footer-text">
+                      {" "}
+                      pour {t.max_people}
+                    </span>
+                  </p>
+                  <p className="card-rating">
+                    <span className="card-footer-prix">{t.rating}</span>
+                    <span className="card-footer-text"> rating (5)</span>
+                  </p>
+                  <Link to="/details" className="btn btn-green btn-small">
+                    Details
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="center-btn btn-margin">
+            <Link to="/details" className="btn btn-green">
+              Afficher plus de tours{" "}
+            </Link>
+          </div>
+        </main>
+        <section className="section-stories">
+          <div className="center margin-bottom-8">
             <h3 className="heading-secondary">
-            les tours les plus populaires
+              nous rendons les gens tres heureux
             </h3>
           </div>
-        <div className="card-container">
-          <div className="card">
-            <div className="card-header">
-              <div className="card-image">
-                <div className="card-image-overlay"></div>
-                <img src={camels} alt="camels" className="card-img-pic"/>
-              </div>
-              <h3 className="heading-three">
-                <span>The sea Explorer</span>
-              </h3>
-            </div>
-            <div className="card-details">
-              <h4 className="card-sub-header"> 7days-tour</h4>
-              <p className="card-text"> Loremlkjk klkjk hjjkb jhgfh  jhkjlh fhghjj  khjg gjhjk jhg j gjh kh</p>
-              <div className="card-data">
-                <GrLocation className='card-icon' />
-                <span>khartoum</span>
-              </div>
-              <div className="card-data">
-                <GrLocation className='card-icon' />
-                <span>khartoum</span>
-              </div>
-              <div className="card-data">
-              <GrLocation className='card-icon' />
-                <span>khartoum</span>
-              </div>
-              <div className="card-data">
-              <GrLocation className='card-icon' />
-                <span>khartoum</span>
-              </div>
-            </div>
-            <div className="card-footer">
-              <p>
-                <span className='card-footer-prix'> 300€</span>
-                <span className="card-footer-text">7 persons</span>
-              </p>
-              <p className="card-rating">
-                <span className='card-footer-prix'>4.8</span>
-                <span className="card-footer-text">rating (5)</span>
-              </p>
+          <div className="row">
+            <div className="story">
+              Text
             </div>
           </div>
-        </div>
+        </section>
       </section>
-      </IconContext.Provider>
     </>
   );
 };
