@@ -12,10 +12,14 @@ import { BiUser } from "react-icons/bi";
 import { BiFlag } from "react-icons/bi";
 
 import tourService from "../../services/tours";
-
+//images
 import pyramid from "../../assets/images/pyramid.jpg";
 import camels from "../../assets/images/camels.jpg";
 import tutil from "../../assets/images/tutil.jpg";
+import carolineTestimony from "../../assets/images/testimony2.jpg";
+import leo from "../../assets/images/testimony4.jpg";
+import lena from "../../assets/images/testimony5.jpg";
+import sudan from "../../assets/videos/sudan.mp4";
 
 import "./home.scss";
 
@@ -203,7 +207,7 @@ const Home = () => {
                   </p>
                   <p className="card-rating">
                     <span className="card-footer-prix">{t.rating}</span>
-                    <span className="card-footer-text"> rating (5)</span>
+                    <span className="card-footer-text"> évaluation (5)</span>
                   </p>
                   <Link to="/details" className="btn btn-green btn-small">
                     Details
@@ -214,19 +218,68 @@ const Home = () => {
           </div>
           <div className="center-btn btn-margin">
             <Link to="/details" className="btn btn-green">
-              Afficher plus de tours{" "}
+              Découvrir plus de tours &rarr;{" "}
             </Link>
           </div>
         </main>
         <section className="section-stories">
+          <div className="bg-video">
+            <video className="bg-video__content" autoPlay muted loop id="video">
+              <source src={sudan} type="video/mp4" />
+              you browser is not supported
+            </video>
+          </div>
           <div className="center margin-bottom-8">
-            <h3 className="heading-secondary">
+            <h3 className="heading-secondary margin-small">
               nous rendons les gens tres heureux
             </h3>
           </div>
           <div className="row">
             <div className="story">
-              Text
+              <figure className="story__shape">
+                <img
+                  src={carolineTestimony}
+                  alt="carolineTestimony"
+                  className="story__image"
+                />
+                <figcaption className="story__caption">
+                  Caroline Geoffrey
+                </figcaption>
+              </figure>
+              <article className="story__text">
+                <h3 className="story__heading">
+                  C'était le meilleur voyage de ma vie
+                </h3>
+                <p>
+                  "Sed ut perspiciatis unde omnis iste natus error sit
+                  voluptatem accusantium doloremque laudantium, totam rem
+                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                  architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                  voluptatem quia voluptas sit aspernatur aut odit aut skjlm".
+                </p>
+              </article>
+            </div>
+          </div>
+          <div className="row">
+            <div className="story">
+              <figure className="story__shape">
+                <img
+                  src={leo}
+                  alt="carolineTestimony"
+                  className="story__image"
+                />
+                <figcaption className="story__caption">leo marc</figcaption>
+              </figure>
+              <article className="story__text">
+                <h3 className="story__heading">Wow! ça change ma vie</h3>
+                <p>
+                  "Sed ut perspiciatis unde omnis iste natus error sit
+                  voluptatem accusantium doloremque laudantium, totam rem
+                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                  architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
+                  voluptatem quia voluptas sit aspernatur aut odit aut skjlm".
+                </p>
+              </article>
             </div>
           </div>
         </section>
