@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import userService from "../../services/users";
+import { UserContext } from "../../App";
 
 import "./style.scss";
 
 const Login = () => {
+  const {state, dispatch} = useContext(UserContext)
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory()
 
   const handleClick = async () => {
     try{
-      const response= await userService.login(email, password)
-      localStorage.setItem('token',response.data.token)
+      const {data}= await userService.login(email, password);
+      localStorage.setItem('user', JSON.stringify(data.user))
+      localStorage.setItem('token',data.token)
+      dispatch({type:"USER", payload: data.user})
       history.push('/')
     }catch(error){
       console.error(error.response.data);
