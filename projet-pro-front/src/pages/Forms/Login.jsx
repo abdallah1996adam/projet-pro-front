@@ -1,31 +1,66 @@
-import React from "react";
-import {Link} from "react-router-dom"
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 
+import userService from "../../services/users";
 
-import './style.scss'
+import "./style.scss";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory()
+
+  const handleClick = async () => {
+    try{
+      const response= await userService.login(email, password)
+      localStorage.setItem('token',response.data.token)
+      history.push('/')
+    }catch(error){
+      console.error(error.response.data);
+    }
+  };
   return (
     <>
-     <main className="base-container">
-       <div className="base-container__form">
-         <h5 className="heading-secondary">CONNECTEZ-VOUS À VOTRE COMPTE</h5>
-         <form className="form-login">
-           <div className="form-group">
-             <label htmlFor="email" className="form-label"> Email</label>
-             <input className="form-input" type="email" placeholder="vous@exemple.com" required/>
-           </div>
-           <div className="form-group">
-             <label htmlFor="password" className="form-label"> Mot de passe</label>
-             <input className="form-input" type="password" placeholder="••••••••••••" required minLength="4"/>
-           </div>
-           <div className="form-group group-flex">
-             <button className="btn btn-green">Login</button>
-             <Link className="form-link" to="/signup">vous n'avze pas un compte?</Link>
-           </div>
-         </form>
-       </div>
-     </main>
+      <main className="base-container">
+        <div className="base-container__form">
+          <h5 className="heading-secondary">CONNECTEZ-VOUS À VOTRE COMPTE</h5>
+          <form className="form-login">
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                className="form-input"
+                type="email"
+                placeholder="vous@exemple.com"
+                value={email}
+                onChange={(e)=> setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Mot de passe
+              </label>
+              <input
+                className="form-input"
+                type="password"
+                placeholder="••••••••••••"
+                value={password}
+                onChange={(e)=> setPassword(e.target.value)}
+                required
+                minLength="4"
+              />
+            </div>
+            <div className="form-group group-flex">
+              <Link onClick={handleClick} className="btn btn-green">Login</Link>
+              <Link className="form-link" to="/signup">
+                Vous n'avze pas un compte?
+              </Link>
+            </div>
+          </form>
+        </div>
+      </main>
     </>
   );
 };

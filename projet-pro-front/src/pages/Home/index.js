@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 //icons
 import { Link } from "react-router-dom";
 import { IoMdCompass } from "react-icons/io";
-import { IconContext } from "react-icons/lib";
 import { MdNaturePeople } from "react-icons/md";
 import { FaWpexplorer } from "react-icons/fa";
 import { GiCampingTent } from "react-icons/gi";
@@ -18,7 +17,6 @@ import camels from "../../assets/images/camels.jpg";
 import tutil from "../../assets/images/tutil.jpg";
 import carolineTestimony from "../../assets/images/testimony2.jpg";
 import leo from "../../assets/images/testimony4.jpg";
-import lena from "../../assets/images/testimony5.jpg";
 import sudan from "../../assets/videos/sudan.mp4";
 
 import "./home.scss";
