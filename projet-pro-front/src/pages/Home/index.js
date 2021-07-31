@@ -69,7 +69,7 @@ const Home = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
                 non njkllm laoreet odio.
               </p>
-              <Link to="#" className="btn-txt">
+              <Link to="/details" className="btn-txt">
                 Trouver plus &rarr;
               </Link>
             </div>
@@ -207,7 +207,10 @@ const Home = () => {
                     <span className="card-footer-prix">{t.rating}</span>
                     <span className="card-footer-text"> évaluation (5)</span>
                   </p>
-                  <Link to="/details" className="btn btn-green btn-small">
+                  <Link
+                    to={"/tour/:" + t.id}
+                    className="btn btn-green btn-small"
+                  >
                     Details
                   </Link>
                 </div>
@@ -215,7 +218,7 @@ const Home = () => {
             ))}
           </div>
           <div className="center-btn btn-margin">
-            <Link to="/details" className="btn btn-green">
+            <Link to="/tours" className="btn btn-green">
               Découvrir plus de tours &rarr;{" "}
             </Link>
           </div>

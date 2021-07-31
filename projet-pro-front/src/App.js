@@ -8,6 +8,8 @@ import Header from "./pages/partials/Header";
 import { Login } from "./pages/Forms";
 import { Signup } from "./pages/Forms";
 import Profile from "./pages/Profile";
+import Tours from "./pages/Tours";
+import Details from "./pages/Details";
 
 export const UserContext = createContext();
 
@@ -20,13 +22,13 @@ const Routing = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    //if the user close the application but he hasn't logged out yet so in that case my state is getting destroyed so I should update the state
+//if the user close the application but he hasn't logged out yet so in that case my state is getting destroyed so I should update the state
     if (user) {
       dispatch({type:"USER", payload:user})
       history.push("/");
-    } else {
-      history.push("/signup");
-    }
+     }// else {
+    //   history.push("/tour/:id");
+    // }
   }, []);
 
   return (
@@ -36,6 +38,8 @@ const Routing = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/tours" component={Tours} />
+        <Route exact path="/tour/:id" component={Details} />
       </Switch>
     </>
   );

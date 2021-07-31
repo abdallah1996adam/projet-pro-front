@@ -2,8 +2,11 @@ import api from "./api";
 
 const tourService = {
   getAll: async () => {
-    return await api.get("http://localhost:4444/api/tours");
+    return await api.get("tours");
   },
+  getById: async (id)=>{
+    return await api.get('tour:'+ id)
+  }
 };
 
 export default tourService;

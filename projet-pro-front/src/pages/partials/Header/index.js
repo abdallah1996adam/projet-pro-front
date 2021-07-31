@@ -8,14 +8,13 @@ import "./header.scss";
 
 const Header = () => {
   const { state, dispatch } = useContext(UserContext);
-
   const renderList = () => {
     if (state) {
       return [
         <NavLink to="/profile" exact className="navlink">
           Profile
         </NavLink>,
-        <NavLink to="/signup" exact className="navlink">
+        <NavLink to="/tours" exact className="navlink">
           Tours
         </NavLink>,
         <NavLink to="" exact className="navlink">
@@ -24,7 +23,7 @@ const Header = () => {
         <NavLink  className="navlink" onClick={()=>{
           localStorage.clear()
           dispatch({type:"CLEAR"})
-        }} to="/">
+        }} to="/login">
           logout
         </NavLink>,
       ];
@@ -33,7 +32,7 @@ const Header = () => {
         <NavLink to="/signup" exact className="navlink">
           Signup
         </NavLink>,
-        <NavLink to="/signup" exact className="navlink">
+        <NavLink to="/tours" exact className="navlink">
           Tours
         </NavLink>,
         <NavLink to="/login" exact className="navlink">
