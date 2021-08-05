@@ -69,7 +69,7 @@ const Home = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
                 non njkllm laoreet odio.
               </p>
-              <Link to="/details" className="btn-txt">
+              <Link to="/tours" className="btn-txt">
                 Trouver plus &rarr;
               </Link>
             </div>
@@ -156,8 +156,8 @@ const Home = () => {
         </div>
         <main className="main">
           <div className="card-container">
-            {tour.map((t) => (
-              <div className="card" key={t.id}>
+            {tour.map((t,i) => (
+              <div className="card" key={i}>
                 <div className="card-header">
                   <div className="card-image">
                     <div className="card-image-overlay"></div>

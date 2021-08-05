@@ -6,6 +6,10 @@
   font-family: "lato";
   src: url("../../assets/Lato/Lato-Regular.ttf");
 }
+@font-face {
+  font-family: "CinzelDecorative-Regular";
+  src: url("../../assets/Cinzel_Decorative/CinzelDecorative-Regular.ttf");
+}
 .container {
   height: 95vh;
   background-image: url(../../assets/images/travel.jpg);
@@ -22,12 +26,13 @@
       color: #fff;
       text-transform: uppercase;
       backface-visibility: hidden;
+
       .heading-main {
         font-family: "CinzelDecorative-Bold";
         display: block;
         font-size: 7rem;
         letter-spacing: 1rem;
-        font-weight: 400;
+
         animation: moveLeft ease-out 1s;
       }
       .heading-sub {
@@ -140,6 +145,7 @@ main {
         font-weight: 700;
         text-transform: uppercase;
         color: #777;
+        
       }
       .margin-small {
         margin-bottom: 1.5rem;
@@ -449,7 +455,7 @@ main {
         left: 0;
         height: 100%;
         width: 100%;
-        opacity: 0.20;
+        opacity: 0.2;
         object-fit: cover;
         overflow: hidden;
       }
