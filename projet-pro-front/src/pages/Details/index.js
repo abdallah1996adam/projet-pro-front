@@ -18,7 +18,6 @@ const Details = (props) => {
 
   const [tourDetails, setTourDetails] = useState(null);
 
-  
   useEffect(() => {
     async function fetchData() {
       const { data } = await tourService.getById(id);
