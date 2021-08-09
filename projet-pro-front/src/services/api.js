@@ -9,7 +9,7 @@ api.interceptors.request.use(
   (confing) => {
     const token = localStorage.getItem("token");
     if (token) {
-      confing.headers.Authorization = "Bearer" + token;
+      confing.headers.Authorization = "Bearer " + token;
     }
     return confing;
   },

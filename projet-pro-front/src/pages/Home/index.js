@@ -26,10 +26,14 @@ const Home = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = await tourService.getAll();
-      const tourData = data.results;
-      const tours = tourData.slice(0, 3);
-      setTour(tours);
+      try {
+        const { data } = await tourService.getAll();
+        const tourData = data.results;
+        const tours = tourData.slice(0, 3);
+        setTour(tours);
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetchData();
   }, []);
@@ -156,7 +160,7 @@ const Home = () => {
         </div>
         <main className="main">
           <div className="card-container">
-            {tour.map((t,i) => (
+            {tour.map((t, i) => (
               <div className="card" key={i}>
                 <div className="card-header">
                   <div className="card-image">

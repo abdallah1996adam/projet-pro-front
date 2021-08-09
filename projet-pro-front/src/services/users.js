@@ -9,8 +9,8 @@ const userService = {
     const user = { email, password };
     return await api.post("login", user);
   },
-  getById: async(id)=>{
-    return await api.post('/user/:id', id)
+  getById: async()=>{
+    return await api.post('profile')
   }
 };
 

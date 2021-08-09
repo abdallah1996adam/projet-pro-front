@@ -26,9 +26,9 @@ const Routing = () => {
     if (user) {
       dispatch({type:"USER", payload:user})
       history.push("/");
-     }// else {
-    //   history.push("/tour/:id");
-    // }
+     } else {
+       history.push("/");
+     }
   }, []);
 
   return (
@@ -37,7 +37,7 @@ const Routing = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/profile/:id" component={Profile} />
+        <Route exact path="/profile" component={Profile} />
         <Route exact path="/tours" component={Tours} />
         <Route exact path="/tour/:id" component={Details} />
       </Switch>
