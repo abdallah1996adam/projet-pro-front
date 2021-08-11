@@ -23,12 +23,12 @@ const Routing = () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
 //if the user close the application but he hasn't logged out yet so in that case my state is getting destroyed so I should update the state
-    if (user) {
-      dispatch({type:"USER", payload:user})
-      history.push("/");
-     } else {
-       history.push("/");
-     }
+    // if (user) {
+    //   dispatch({type:"USER", payload:user})
+    //   history.push("/");
+    //  } else {
+    //    history.push("/");
+    //  }
   }, []);
 
   return (

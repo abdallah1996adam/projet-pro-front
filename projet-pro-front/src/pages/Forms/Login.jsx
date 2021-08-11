@@ -19,7 +19,7 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(data.user))
       localStorage.setItem('token',data.token)
       dispatch({type:"USER", payload: data.user})
-      history.push('/' )
+      history.push('/profile' )
     }catch(error){
       console.error(error);
     }
