@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import defaultImg from "../../assets/images/default.jpg";
 //icons
 import { FiSettings } from "react-icons/fi";
+import {IoBagCheckOutline} from 'react-icons/io5'
+import {BsStar} from "react-icons/bs"
+import {BsCreditCard} from 'react-icons/bs'
 
 import userService from "../../services/users";
 
@@ -40,21 +43,21 @@ const Profile = () => {
               <li className="active">
                 <Link to="#" className="link">
                   {" "}
-                  <FiSettings color="white" className="view-icon" />
+                  <IoBagCheckOutline color="white" className="view-icon" />
                   Mes réservations
                 </Link>
               </li>
               <li className="active">
                 <Link to="#" className="link">
                   {" "}
-                  <FiSettings color="white" className="view-icon" />
+                  <BsStar color="white" className="view-icon" />
                   Mes avis
                 </Link>
               </li>
               <li className="active">
                 <Link to="#" className="link">
                   {" "}
-                  <FiSettings color="white" className="view-icon" />
+                  <BsCreditCard color="white" className="view-icon" />
                   facturation
                 </Link>
               </li>
@@ -99,9 +102,54 @@ const Profile = () => {
                   />
                   <label for="photo">Choisissez une nouvelle photo</label>
                 </div>
+                <div className="form-group right">
+                  <Link className="btn5 btn5-small btn5-green">Enregistrer</Link>
+                </div>
               </form>
             </div>
             <div className="line"></div>
+            <div className="user-view-container">
+            <h6 className="user-view-header ma-bt">Changer votre mot de passe</h6>
+            <div className="form-group">
+                  <label htmlFor="text" className="form-label">
+                  Mot de passe actuel
+                  </label>
+                  <input
+                    className="form-input"
+                    type="password"
+                    placeholder="••••••••••••"
+                    // value={firstName}
+                    //onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="text" className="form-label">
+                  Nouveau mot de passe
+                  </label>
+                  <input
+                    className="form-input"
+                    type="password"
+                    placeholder="••••••••••••"
+                    // value={firstName}
+                    //onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="text" className="form-label">
+                  Confirmez le mot de passe
+                  </label>
+                  <input
+                    className="form-input"
+                    type="password"
+                    placeholder="••••••••••••"
+                    // value={firstName}
+                    //onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
+                <div className="form-group right">
+                  <Link className="btn5 btn5-small btn5-green">Sauvegarder le mot de passe</Link>
+                </div>
+            </div>
           </aside>
         </div>
       </main>
