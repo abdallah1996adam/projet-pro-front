@@ -11,6 +11,9 @@ const userService = {
   },
   getById: async()=>{
     return await api.post('profile')
+  },
+  addUserImg : async(imgData)=>{
+    return await api.post('userImage',imgData)
   }
 };
 

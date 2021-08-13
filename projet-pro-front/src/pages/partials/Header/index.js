@@ -1,13 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 import { UserContext } from "../../../App";
+import userService from "../../../services/users";
 
 import Logo from "./images/logo.png";
+import userDefault from "../../../assets/images/default.jpg"
 import "./header.scss";
 
 const Header = () => {
   const { state, dispatch } = useContext(UserContext);
+  const [userData, setUserData] = useState([])
+
+  useEffect(()=>{
+    async function fetchData(){
+      try{
+        const {data} = await userService.getById()
+        setUserData(data.userData)
+       
+
+      }catch(error){
+        console.error(error);
+      }
+    }
+    fetchData()
+      
+  },[])
+
+
   const renderList = () => {
     if (state) {
       return [
@@ -26,6 +46,11 @@ const Header = () => {
         }} to="/login">
           logout
         </NavLink>,
+         <NavLink to="/profile" exact className="nav-el" >
+         <img src={userDefault ? userDefault : `data:image/png;base64,${userData.userImage}`} alt="default user" className="nav-user__img"/>
+         <span >{userData.firstName}</span>
+       </NavLink>
+
       ];
     } else {
       return [
