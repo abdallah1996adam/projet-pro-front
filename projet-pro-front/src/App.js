@@ -10,6 +10,7 @@ import { Signup } from "./pages/Forms";
 import Profile from "./pages/Profile";
 import Tours from "./pages/Tours";
 import Details from "./pages/Details";
+import Footer from "./pages/partials/Footer";
 
 export const UserContext = createContext();
 
@@ -23,12 +24,12 @@ const Routing = () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
 //if the user close the application but he hasn't logged out yet so in that case my state is getting destroyed so I should update the state
-    if (user) {
-      dispatch({type:"USER", payload:user})
-      history.push("/profile");
-     } else {
-       history.push("/");
-     }
+    // if (user) {
+    //   dispatch({type:"USER", payload:user})
+    //   history.push("/profile");
+    //  } else {
+    //    history.push("/");
+    //  }
   }, []);
 
   return (
@@ -52,6 +53,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routing />
+        <Footer/>
       </BrowserRouter>
     </UserContext.Provider>
   );

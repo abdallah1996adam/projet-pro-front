@@ -29,8 +29,10 @@ const Header = () => {
 
 
   const renderList = () => {
+
     if (state) {
       return [
+        
         <NavLink to="/profile" exact className="navlink">
           Profile
         </NavLink>,
@@ -47,7 +49,7 @@ const Header = () => {
           logout
         </NavLink>,
          <NavLink to="/profile" exact className="nav-el" >
-         <img src={userDefault ? userDefault : `data:image/png;base64,${userData.userImage}`} alt="default user" className="nav-user__img"/>
+         <img src={`data:image/png;base64,${userData.userImage}` ?`data:image/png;base64,${userData.userImage}` : userDefault}  className="nav-user__img" alt="profile"/>
          <span >{userData.firstName}</span>
        </NavLink>
 

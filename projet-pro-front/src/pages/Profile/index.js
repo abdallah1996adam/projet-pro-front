@@ -117,7 +117,7 @@ const Profile = () => {
                   </div>
                   <div className="upload-img form_upload">
                     <img
-                      src={defaultImg ? defaultImg : `data:image/png;base64,${userData.userImage}`}
+                      src={ `data:image/png;base64,${userData.userImage}` ?`data:image/png;base64,${userData.userImage}` : defaultImg } 
                       alt="profile"
                       className="user-photo"
                     />

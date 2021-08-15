@@ -19,6 +19,7 @@ import carolineTestimony from "../../assets/images/testimony2.jpg";
 import leo from "../../assets/images/testimony4.jpg";
 import sudan from "../../assets/videos/sudan.mp4";
 
+
 import "./home.scss";
 
 const Home = () => {
