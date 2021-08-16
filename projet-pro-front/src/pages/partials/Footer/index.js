@@ -1,33 +1,35 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 //images
-import logo from "../../../assets/images/logo.png"
+import logo from "../../../assets/images/logo.png";
 
 import "./footer.scss";
 
+const Footer = () => {
+  return (
+    <React.Fragment>
+      <footer className="footer">
+        <div className="footer__list">
+          <Link to="/" className="footer__link">
+            Home
+          </Link>
 
-const Footer = ()=>{
+          <Link to="/tours" className="footer__link">
+            Tours
+          </Link>
 
-    return(
-        <React.Fragment>
-            <footer className="footer">
-                <div className="footer__logo-box">
-                    <picture className="footer__logo">
-                       
-                        <img src={logo} alt="logo" className="footer__logo"/>
-                        <h5 className='footer__header'> Suda Tours</h5>
-                    </picture>
-                    
-                </div>
-                <div className="row">
-                    <div className="col-1-of-2">
-                        
-                    </div>
-                </div>
-            </footer>
-
-        </React.Fragment>
-    )
-}
+          <Link to="#" className="footer__link">
+            Contact
+          </Link>
+          <Link to="#" className="footer__link">
+            POLITIQUE DE CONFIDENTIALITÉ
+          </Link>
+        </div>
+        <p className="footer__text">Copyright © Code and Create All Rights Resrved Abdallah Adam</p>
+      </footer>
+    </React.Fragment>
+  );
+};
 
 export default Footer;

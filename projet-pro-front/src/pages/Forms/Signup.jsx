@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import userService from "../../services/users";
 
+
+
 import "./style.scss";
+
+toast.configure();
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -22,7 +29,8 @@ const Signup = () => {
       );
       history.push("/login");
     } catch (error) {
-      console.error(error.response.data.Error);
+    toast.error(error.response.data.Error,{position: toast.POSITION.TOP_CENTER})
+      console.log(error.response.data.Error);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import ReactMapGl from "react-map-gl";
 import { Link } from "react-router-dom";
@@ -17,11 +17,13 @@ import camels from "../../assets/images/camels.jpg";
 import mount from "../../assets/images/mount.jpg";
 
 import tourService from "../../services/tours";
+import { UserContext } from "../../App";
 
 import "./style.scss";
 
 const Details = (props) => {
   const id = props.match.params.id;
+  const { state } = useContext(UserContext);
 
   const [tourDetails, setTourDetails] = useState(null);
   const [viewport, setViewport] = useState({
@@ -40,6 +42,24 @@ const Details = (props) => {
     }
     fetchData();
   }, []);
+
+  const Booking = () => {
+    if (state) {
+      return (
+        <Link to="/" className="btn btn-green span-all-rows">
+         Acheter un ticket
+        </Link>
+      );
+    } else {
+      return (
+        <Link to="/login" className="btn btn-green span-all-rows">
+          Connectez-vous
+        </Link>
+      );
+    }
+  };
+
+
   return (
     <>
       {tourDetails && (
@@ -170,7 +190,7 @@ const Details = (props) => {
                   {tourDetails[0].duration}, Aventures incroyables. Souvenirs
                   infinis. Faites-en le vôtre aujourd'hui !
                 </p>
-                <Link to="/login" className="btn btn-green span-all-rows">Connectez-vous</Link>
+                {Booking()}
               </div>
             </div>
           </section>

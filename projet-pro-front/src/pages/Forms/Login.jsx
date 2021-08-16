@@ -3,8 +3,13 @@ import { Link, useHistory } from "react-router-dom";
 
 import userService from "../../services/users";
 import { UserContext } from "../../App";
+import { toast } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
 
 import "./style.scss";
+
+toast.configure();
 
 const Login = () => {
   const {state, dispatch} = useContext(UserContext)
@@ -19,8 +24,10 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(data.user))
       localStorage.setItem('token',data.token)
       dispatch({type:"USER", payload: data.user})
+      toast.success("Bienvenu", {position: toast.POSITION.TOP_CENTER})
       history.push('/profile' )
     }catch(error){
+      toast.error(error.response.data.Error,{position: toast.POSITION.TOP_CENTER})
       console.error(error);
     }
   };
