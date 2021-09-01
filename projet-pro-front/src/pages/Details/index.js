@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import ReactMapGl from "react-map-gl";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useStripe } from "@stripe/react-stripe-js";
 import "moment/locale/fr";
 
 //icons
@@ -17,18 +19,24 @@ import camels from "../../assets/images/camels.jpg";
 import mount from "../../assets/images/mount.jpg";
 
 import tourService from "../../services/tours";
+import bookingService from "../../services/booking";
 import { UserContext } from "../../App";
 
 import "./style.scss";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.configure();
 
 const Details = (props) => {
   const id = props.match.params.id;
   const { state } = useContext(UserContext);
+  const stripe = useStripe();
 
   const [tourDetails, setTourDetails] = useState(null);
+
   const [viewport, setViewport] = useState({
-    latitude: 45.4211,
-    longitude: -75.6903,
+    latitude: 18.325999,
+    longitude: 31.505999,
     width: "100%",
     height: "100%",
     zoom: 10,
@@ -43,11 +51,28 @@ const Details = (props) => {
     fetchData();
   }, []);
 
+  const sendBooking = async () => {
+    const tourId = tourDetails[0].id;
+    try {
+      const { data } = await bookingService.addBooking(tourId);
+      const sessionId = data.session.id;
+      const error = stripe.redirectToCheckout({
+        sessionId,
+      });
+      if (error) {
+        console.log(error);
+      }
+      toast.success(data.message, { position: toast.POSITION.TOP_CENTER });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const Booking = () => {
     if (state) {
       return (
-        <Link to="/" className="btn btn-green span-all-rows">
-         Acheter un ticket
+        <Link onClick={sendBooking} className="btn btn-green span-all-rows">
+          Acheter un ticket
         </Link>
       );
     } else {
@@ -58,7 +83,6 @@ const Details = (props) => {
       );
     }
   };
-
 
   return (
     <>
@@ -188,7 +212,7 @@ const Details = (props) => {
                 </h5>
                 <p className="cta-content-text">
                   {tourDetails[0].duration}, Aventures incroyables. Souvenirs
-                  infinis. Faites-en le vôtre aujourd'hui !
+                  infinis. Faites-en le vôtre aujourd'hui !
                 </p>
                 {Booking()}
               </div>

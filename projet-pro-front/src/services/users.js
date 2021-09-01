@@ -14,6 +14,9 @@ const userService = {
   },
   addUserImg : async(imgData)=>{
     return await api.post('userImage',imgData)
+  },
+  updatePassword : async(password)=>{
+    return await api.put('user', {password})
   }
 };
 

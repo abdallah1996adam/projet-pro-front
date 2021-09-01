@@ -5,54 +5,53 @@ import { UserContext } from "../../../App";
 import userService from "../../../services/users";
 
 import Logo from "./images/logo.png";
-import userDefault from "../../../assets/images/default.jpg"
+import userDefault from "../../../assets/images/default.jpg";
 import "./header.scss";
 
 const Header = () => {
   const { state, dispatch } = useContext(UserContext);
-  const [userData, setUserData] = useState([])
+  const [userData, setUserData] = useState([]);
 
-  useEffect(()=>{
-    async function fetchData(){
-      try{
-        const {data} = await userService.getById()
-        setUserData(data.userData)
-       
-
-      }catch(error){
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await userService.getById();
+        setUserData(data.userData);
+      } catch (error) {
         console.error(error);
       }
     }
-    fetchData()
-      
-  },[])
-
+    fetchData();
+  }, []);
 
   const renderList = () => {
-
     if (state) {
       return [
-        
         <NavLink to="/profile" exact className="navlink">
           Profile
         </NavLink>,
         <NavLink to="/tours" exact className="navlink">
           Tours
         </NavLink>,
-        <NavLink to="" exact className="navlink">
-          Contact
-        </NavLink>,
-        <NavLink  className="navlink" onClick={()=>{
-          localStorage.clear()
-          dispatch({type:"CLEAR"})
-        }} to="/login">
+      
+        <NavLink
+          className="navlink"
+          onClick={() => {
+            localStorage.clear();
+            dispatch({ type: "CLEAR" });
+          }}
+          to="/login"
+        >
           logout
         </NavLink>,
-         <NavLink to="/profile" exact className="nav-el" >
-         <img src={`data:image/png;base64,${userData.userImage}` ?`data:image/png;base64,${userData.userImage}` : userDefault}  className="nav-user__img" alt="profile"/>
-         <span >{userData.firstName}</span>
-       </NavLink>
-
+        <NavLink to="/profile" exact className="nav-el">
+          <img
+            src={`data:image/png;base64,${userData.userImage}`}
+            className="nav-user__img"
+            alt="profile"
+          />
+          <span>{userData.firstName}</span>
+        </NavLink>,
       ];
     } else {
       return [
@@ -65,9 +64,7 @@ const Header = () => {
         <NavLink to="/login" exact className="navlink">
           Login
         </NavLink>,
-        <NavLink to="" exact className="navlink">
-          Contact
-        </NavLink>,
+   
       ];
     }
   };

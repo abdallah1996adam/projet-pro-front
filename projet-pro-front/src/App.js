@@ -1,4 +1,4 @@
-import React, { useEffect, createContext, useReducer, useContext} from "react";
+import React, { useEffect, createContext, useReducer, useContext } from "react";
 import { Route, Switch, BrowserRouter, useHistory } from "react-router-dom";
 
 import { reducer, initialState } from "./reducers/userReducer";
@@ -11,25 +11,25 @@ import Profile from "./pages/Profile";
 import Tours from "./pages/Tours";
 import Details from "./pages/Details";
 import Footer from "./pages/partials/Footer";
+import UserBooking from "./pages/Profile/UserBooking";
 
 export const UserContext = createContext();
 
 //create routing component to get access to the history
 const Routing = () => {
-
-  const {state,dispatch} = useContext(UserContext)
+  const { state, dispatch } = useContext(UserContext);
   const history = useHistory();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-//if the user close the application but he hasn't logged out yet so in that case my state is getting destroyed so I should update the state
+    //if the user close the application but he hasn't logged out yet so in that case my state is getting destroyed so I should update the state
     if (user) {
-      dispatch({type:"USER", payload:user})
+      dispatch({ type: "USER", payload: user });
       history.push("/profile");
-     } else {
-       history.push("/");
-     }
+    } else {
+      history.push("/");
+    }
   }, []);
 
   return (
@@ -39,10 +39,12 @@ const Routing = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/profile" component={Profile} />
+        <Route exact path="/proflie/:id" component={UserBooking}/>
         <Route exact path="/tours" component={Tours} />
         <Route exact path="/tour/:id" component={Details} />
       </Switch>
     </>
+   
   );
 };
 
@@ -53,7 +55,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routing />
-        <Footer/>
+        <Footer />
       </BrowserRouter>
     </UserContext.Provider>
   );

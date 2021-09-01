@@ -94,7 +94,7 @@ const Signup = () => {
                 Signup
               </Link>
               <Link className="form-link" to="/login">
-                Vous avze déjà un compte?{" "}
+                Vous avez déjà un compte?{" "}
               </Link>
             </div>
           </form>

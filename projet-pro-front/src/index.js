@@ -4,10 +4,16 @@ import "./assets/index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { IconContext } from "react-icons/lib";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 ReactDOM.render(
   <IconContext.Provider value={{ color: "#7ed56f", size: "7rem" }}>
-    <App />
+    <Elements stripe={stripePromise}>
+      <App />
+    </Elements>
   </IconContext.Provider>,
   document.getElementById("root")
 );

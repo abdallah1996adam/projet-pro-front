@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 //images
 import defaultImg from "../../assets/images/default.jpg";
@@ -12,10 +13,14 @@ import { BsCreditCard } from "react-icons/bs";
 import userService from "../../services/users";
 
 import "./profile.scss";
+import "react-toastify/dist/ReactToastify.css";
+
+toast.configure();
 
 const Profile = () => {
   const [userData, setUserData] = useState([]);
-  const [file,setFile] = useState('')
+  const [file, setFile] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -29,22 +34,29 @@ const Profile = () => {
     fetchData();
   }, []);
 
-
-  const handleClick=async(e)=>{
+  const handleClick = async (e) => {
     let imgData = new FormData();
-    imgData.append('file', file)
+    imgData.append("file", file);
 
-
-    try{
-      const {data} = await userService.addUserImg(imgData)
-      setUserData(data.userUpdate)
-      // console.log(userData.userImage);
-
-    }catch(error){
-      console.error(error);
+    try {
+      const { data } = await userService.addUserImg(imgData);
+      setUserData(data.userUpdate);
+      toast.success(data.success, { position: toast.POSITION.TOP_CENTER });
+    } catch (error) {
+      toast.error(error.response.data.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
-  }
+  };
 
+  const changePassword = async () => {
+    try {
+      const { data } = await userService.updatePassword(password);
+      toast.success(data.success, { position: toast.POSITION.TOP_CENTER });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -61,7 +73,7 @@ const Profile = () => {
                   </Link>
                 </li>
                 <li className="active">
-                  <Link to="#" className="link">
+                  <Link to={"/proflie/" + userData.id} className="link">
                     {" "}
                     <IoBagCheckOutline color="white" className="view-icon" />
                     Mes réservations
@@ -117,7 +129,11 @@ const Profile = () => {
                   </div>
                   <div className="upload-img form_upload">
                     <img
-                      src={ `data:image/png;base64,${userData.userImage}` ?`data:image/png;base64,${userData.userImage}` : defaultImg } 
+                      src={
+                        `data:image/png;base64,${userData.userImage}`
+                          ? `data:image/png;base64,${userData.userImage}`
+                          : defaultImg
+                      }
                       alt="profile"
                       className="user-photo"
                     />
@@ -127,21 +143,24 @@ const Profile = () => {
                       type="file"
                       className="form-upload"
                       accept="image/*"
-                      onChange={(e)=> setFile(e.target.files[0])}
+                      onChange={(e) => setFile(e.target.files[0])}
                     />
                     <label for="photo">Choisissez une nouvelle photo</label>
                   </div>
                   <div className="form-group right">
-                    <button className="btn5 btn5-small btn5-green" onClick={handleClick}>
+                    <Link
+                      className="btn5 btn5-small btn5-green"
+                      onClick={handleClick}
+                    >
                       Enregistrer
-                    </button>
+                    </Link>
                   </div>
                 </form>
               </div>
               <div className="line"></div>
               <div className="user-view-container">
                 <h6 className="user-view-header ma-bt">
-                  Changer votre mot de passe
+                  Changez votre mot de passe
                 </h6>
                 <div className="form-group">
                   <label htmlFor="text" className="form-label">
@@ -163,8 +182,8 @@ const Profile = () => {
                     className="form-input"
                     type="password"
                     placeholder="••••••••••••"
-                    // value={firstName}
-                    //onChange={(e) => setFirstName(e.target.value)}
+                    // value={password}
+                    // onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -175,12 +194,15 @@ const Profile = () => {
                     className="form-input"
                     type="password"
                     placeholder="••••••••••••"
-                    // value={firstName}
-                    //onChange={(e) => setFirstName(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className="form-group right">
-                  <Link className="btn5 btn5-small btn5-green">
+                  <Link
+                    onClick={changePassword}
+                    className="btn5 btn5-small btn5-green"
+                  >
                     Sauvegarder le mot de passe
                   </Link>
                 </div>

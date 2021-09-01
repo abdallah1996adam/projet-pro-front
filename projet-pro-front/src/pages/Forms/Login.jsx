@@ -24,7 +24,7 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(data.user))
       localStorage.setItem('token',data.token)
       dispatch({type:"USER", payload: data.user})
-      toast.success("Bienvenu", {position: toast.POSITION.TOP_CENTER})
+      toast.success("Bienvenue", {position: toast.POSITION.TOP_CENTER})
       history.push('/profile' )
     }catch(error){
       toast.error(error.response.data.Error,{position: toast.POSITION.TOP_CENTER})
@@ -67,7 +67,7 @@ const Login = () => {
             <div className="form-group group-flex">
               <Link onClick={handleClick} className="btn btn-green">Login</Link>
               <Link className="form-link" to="/signup">
-                Vous n'avze pas un compte?
+                Vous n'avez pas un compte?
               </Link>
             </div>
           </form>

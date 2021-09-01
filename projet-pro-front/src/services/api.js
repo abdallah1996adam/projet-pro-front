@@ -4,7 +4,6 @@ const api = axios.create({
   baseURL: "http://localhost:4444/api/",
 });
 
-
 api.interceptors.request.use(
   (confing) => {
     const token = localStorage.getItem("token");
